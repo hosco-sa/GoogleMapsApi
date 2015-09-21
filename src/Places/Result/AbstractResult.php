@@ -1,5 +1,5 @@
 <?php
-namespace GoogleMapsApi\Result;
+namespace GoogleMapsApi\Places\Result;
 
 /**
  * Class AbstractResult

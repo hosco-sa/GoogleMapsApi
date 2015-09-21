@@ -2,6 +2,7 @@
 namespace GoogleMapsApi\Places\Result;
 
 use GoogleMapsApi\Places\Object\PlaceObject;
+use GoogleMapsApi\Result\AbstractResult;
 use Psr\Http\Message\ResponseInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -9,7 +10,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
  * Class PredictionResult
  * @package GoogleMapsApi\Places\Result
  */
-class PlaceResult
+class PlaceResult extends AbstractResult
 {
     /**
      * @var array $data
@@ -52,5 +53,13 @@ class PlaceResult
     public function getPlaceObject()
     {
         return new PlaceObject($this->data['result']);
+    }
+
+    /**
+     * @return string
+     */
+    public function getStatus()
+    {
+        return $this->data['status'];
     }
 }
