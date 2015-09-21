@@ -20,12 +20,13 @@ class PlaceResult
      * @param ResponseInterface $httpResponse
      * @throws BadResponseException
      * @see https://developers.google.com/places/web-service/details#PlaceDetailsResults
+     * @throws Exception
      */
     public function __construct(ResponseInterface $httpResponse)
     {
         // Get ResponseInterface content and test it for json
-        $data = $httpResponse->getBody()->getContents();
-        $data = json_decode($data, true);
+        $jsonData = $httpResponse->getBody()->getContents();
+        $data     = json_decode($jsonData, true);
 
         if (false === $data) {
             throw new \InvalidArgumentException(
@@ -34,8 +35,15 @@ class PlaceResult
         }
 
         $options = new OptionsResolver();
-        $options->setDefined(['html_attributions', 'result', 'status']);
+        $options->setDefined(['error_message', 'html_attributions', 'result', 'status']);
         $this->data = $options->resolve($data);
+
+        // Check request status
+        if (!$this->checkRequestStatus()) {
+            throw new Exception(
+                sprintf('Request failed "%s"', $jsonData)
+            );
+        }
     }
 
     /**

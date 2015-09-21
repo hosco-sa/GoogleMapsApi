@@ -64,7 +64,8 @@ class PlacesService implements ServiceApiInterface
     {
         // Required and optional parameters for this function call
         $options = new OptionsResolver();
-        $options->setRequired(['output', 'input']);
+        $options->setDefault('output', 'json');
+        $options->setRequired(['input']);
         $options->setDefined(['offset', 'location', 'radius', 'language', 'types', 'components']);
         $options = $options->resolve($parameters);
 
@@ -93,7 +94,8 @@ class PlacesService implements ServiceApiInterface
     {
         // Required and optional parameters for this function call
         $options = new OptionsResolver();
-        $options->setRequired(['output', 'placeid']);
+        $options->setDefault('output', 'json');
+        $options->setRequired(['placeid']);
         $options->setDefined(['extensions', 'language']);
         $options = $options->resolve($parameters);
 
