@@ -1,0 +1,15 @@
+{
+    "name": "hosco/google-maps-api",
+    "description": "Google Maps Api, server-side",
+    "license": "mit",
+    "authors": [
+        {
+            "name": "Thomas Cantonnet",
+            "email": "thomas@hosco.com"
+        }
+    ],
+    "require": {
+        "symfony/options-resolver": "^2.7",
+        "guzzlehttp/guzzle": "^6.1"
+    }
+}
