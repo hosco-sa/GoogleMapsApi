@@ -2,8 +2,13 @@
 namespace GoogleMapsApi\Service;
 
 use GuzzleHttp\ClientInterface;
+use Psr\Http\Message\ResponseInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
+/**
+ * Class PlacesService
+ * @package GoogleMapsApi\Service
+ */
 class PlacesService implements ServiceApiInterface
 {
     const AUTOCOMPLETE_BASE_URL = 'https://maps.googleapis.com/maps/api/place/autocomplete';
@@ -11,6 +16,10 @@ class PlacesService implements ServiceApiInterface
     /** @var ClientInterface $httpClient */
     private $client;
 
+    /**
+     * @param array $options
+     * @param ClientInterface $httpClient
+     */
     public function __construct(array $options, ClientInterface $httpClient)
     {
         // Required options for this API
@@ -22,11 +31,17 @@ class PlacesService implements ServiceApiInterface
         $this->setHttpClient($httpClient);
     }
 
+    /**
+     * @return ClientInterface
+     */
     public function getHttpClient()
     {
         return $this->client;
     }
 
+    /**
+     * @param ClientInterface $httpClient
+     */
     public function setHttpClient(ClientInterface $httpClient)
     {
         $this->client = $httpClient;
@@ -40,6 +55,7 @@ class PlacesService implements ServiceApiInterface
      *
      * @param array $parameters
      * @see https://developers.google.com/places/web-service/autocomplete
+     * @return ResponseInterface
      */
     public function getPlaceAutocomplete(array $parameters)
     {
@@ -55,9 +71,14 @@ class PlacesService implements ServiceApiInterface
             $parameters
         );
 
-        $this->client->request('GET', $uri);
+        return $this->client->request('GET', $uri);
     }
 
+    /**
+     * @param $uri
+     * @param $parameters
+     * @return string
+     */
     private function buildUri($uri, $parameters)
     {
         $query = http_build_query($parameters);
