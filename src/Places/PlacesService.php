@@ -1,6 +1,7 @@
 <?php
 namespace GoogleMapsApi\Places;
 
+use GoogleMapsApi\Places\Result\PredictionResult;
 use GoogleMapsApi\ServiceApiInterface;
 use GuzzleHttp\ClientInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
