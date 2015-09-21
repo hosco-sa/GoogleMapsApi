@@ -20,9 +20,9 @@ class PredictionResult
      */
     public function __construct(array $data)
     {
-        $data = new OptionsResolver();
-        $data->setRequired(['description', 'place_id', 'reference', 'id', 'terms', 'types', 'matched_substring']);
-        $this->data = $data->resolve($data);
+        $options = new OptionsResolver();
+        $options->setRequired(['description', 'place_id', 'reference', 'id', 'terms', 'types', 'matched_substrings']);
+        $this->data = $options->resolve($data);
     }
 
     /**

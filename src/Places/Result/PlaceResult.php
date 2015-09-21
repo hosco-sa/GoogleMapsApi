@@ -20,9 +20,9 @@ class PlaceResult
      */
     public function __construct(array $data)
     {
-        $data = new OptionsResolver();
-        $data->setRequired(['address_components']);
-        $this->data = $data->resolve($data);
+        $options = new OptionsResolver();
+        $options->setRequired(['address_components']);
+        $this->data = $options->resolve($data);
     }
 
     /**

@@ -1,7 +1,7 @@
 <?php
 namespace GoogleMapsApi\Places;
 
-use GoogleMapsApi\Places\Result\PredictionResult;
+use GoogleMapsApi\Places\Result\PlaceAutocompleteResult;
 use GoogleMapsApi\ServiceApiInterface;
 use GuzzleHttp\ClientInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -56,7 +56,7 @@ class PlacesService implements ServiceApiInterface
      *
      * @param array $parameters
      * @see https://developers.google.com/places/web-service/autocomplete
-     * @return PredictionResult
+     * @return PlaceAutocompleteResult
      */
     public function getPlaceAutocomplete(array $parameters)
     {
@@ -75,7 +75,7 @@ class PlacesService implements ServiceApiInterface
 
         $request = $this->client->request('GET', $uri);
 
-        return new PredictionResult($request);
+        return new PlaceAutocompleteResult($request);
     }
 
     /**
