@@ -2,6 +2,7 @@
 namespace GoogleMapsApi\Places;
 
 use GoogleMapsApi\Places\Result\PlaceAutocompleteResult;
+use GoogleMapsApi\Places\Result\PlaceResult;
 use GoogleMapsApi\ServiceApiInterface;
 use GuzzleHttp\ClientInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -12,7 +13,8 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
  */
 class PlacesService implements ServiceApiInterface
 {
-    const AUTOCOMPLETE_BASE_URL = 'https://maps.googleapis.com/maps/api/place/autocomplete';
+    const AUTOCOMPLETE_BASE_URL  = 'https://maps.googleapis.com/maps/api/place/autocomplete';
+    const PLACE_DETAILS_BASE_URL = 'https://maps.googleapis.com/maps/api/place/details';
 
     /** @var ClientInterface $httpClient */
     private $client;
@@ -76,6 +78,35 @@ class PlacesService implements ServiceApiInterface
         $request = $this->client->request('GET', $uri);
 
         return new PlaceAutocompleteResult($request);
+    }
+
+    /**
+     * Once you have a place_id or a reference from a Place Search, you can request more details about a particular
+     * establishment or point of interest by initiating a Place Details request. A Place Details request returns more
+     * comprehensive information about the indicated place such as its complete address, phone number, user
+     * rating and reviews.
+     * @param array $parameters
+     * @see https://developers.google.com/places/web-service/details
+     * @return PlaceResult
+     */
+    public function getPlaceDetails(array $parameters)
+    {
+        // Required and optional parameters for this function call
+        $options = new OptionsResolver();
+        $options->setRequired(['output', 'placeid']);
+        $options->setDefined(['extensions', 'language']);
+        $options = $options->resolve($parameters);
+
+        // Place the call
+        $uri = $this->buildUri(
+            sprintf('%s/%s', static::PLACE_DETAILS_BASE_URL, $options['output']),
+            $this->options['key'],
+            $parameters
+        );
+
+        $request = $this->client->request('GET', $uri);
+
+        return new PlaceResult($request);
     }
 
     /**

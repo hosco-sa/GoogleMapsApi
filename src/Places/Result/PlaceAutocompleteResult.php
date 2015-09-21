@@ -1,6 +1,7 @@
 <?php
 namespace GoogleMapsApi\Places\Result;
 
+use GoogleMapsApi\Places\Object\PredictionObject;
 use Psr\Http\Message\ResponseInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -40,13 +41,13 @@ class PlaceAutocompleteResult
 
     /**
      * Get predictions from query
-     * @return PredictionResult[]
+     * @return PredictionObject[]
      */
     public function getPredictions()
     {
         $rpredictions = [];
         foreach ($this->data['predictions'] as $prediction) {
-            $rpredictions[] = new PredictionResult($prediction);
+            $rpredictions[] = new PredictionObject($prediction);
         }
 
         return $rpredictions;

@@ -1,6 +1,8 @@
 <?php
 namespace GoogleMapsApi\Places\Result;
 
+use GoogleMapsApi\Places\Object\PlaceObject;
+use Psr\Http\Message\ResponseInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
@@ -15,21 +17,32 @@ class PlaceResult
     private $data;
 
     /**
-     * @param array $data
+     * @param ResponseInterface $httpResponse
+     * @throws BadResponseException
      * @see https://developers.google.com/places/web-service/details#PlaceDetailsResults
      */
-    public function __construct(array $data)
+    public function __construct(ResponseInterface $httpResponse)
     {
+        // Get ResponseInterface content and test it for json
+        $data = $httpResponse->getBody()->getContents();
+        $data = json_decode($data, true);
+
+        if (false === $data) {
+            throw new \InvalidArgumentException(
+                sprintf('Response : "%s" has wrong format', $data)
+            );
+        }
+
         $options = new OptionsResolver();
-        $options->setRequired(['address_components']);
+        $options->setDefined(['html_attributions', 'result', 'status']);
         $this->data = $options->resolve($data);
     }
 
     /**
-     * @return string
+     * @return PlaceObject
      */
-    public function getPlaceId()
+    public function getPlaceObject()
     {
-        return $this->data['place_id'];
+        return new PlaceObject($this->data['result']);
     }
 }

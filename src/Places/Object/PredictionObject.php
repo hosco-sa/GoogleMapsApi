@@ -1,5 +1,5 @@
 <?php
-namespace GoogleMapsApi\Places\Result;
+namespace GoogleMapsApi\Places\Object;
 
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -7,7 +7,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
  * Class PredictionResult
  * @package GoogleMapsApi\Places\Result
  */
-class PredictionResult
+class PredictionObject
 {
     /**
      * @var array $data
