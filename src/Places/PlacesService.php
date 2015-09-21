@@ -1,8 +1,8 @@
 <?php
 namespace GoogleMapsApi\Places;
 
+use GoogleMapsApi\ServiceApiInterface;
 use GuzzleHttp\ClientInterface;
-use Psr\Http\Message\ResponseInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
