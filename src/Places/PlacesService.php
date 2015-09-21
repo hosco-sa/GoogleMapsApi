@@ -1,5 +1,5 @@
 <?php
-namespace GoogleMapsApi\Service;
+namespace GoogleMapsApi\Places;
 
 use GuzzleHttp\ClientInterface;
 use Psr\Http\Message\ResponseInterface;
@@ -17,15 +17,15 @@ class PlacesService implements ServiceApiInterface
     private $client;
 
     /**
-     * @param array $options
+     * @param array ServiceApiInterface
      * @param ClientInterface $httpClient
      */
-    public function __construct(array $options, ClientInterface $httpClient)
+    public function __construct(array $parameters, ClientInterface $httpClient)
     {
         // Required options for this API
         $options = new OptionsResolver();
         $options->setRequired(['key']);
-        $this->options = $options->resolve($options);
+        $this->options = $options->resolve($parameters);
 
         // Set HTTP Client
         $this->setHttpClient($httpClient);
@@ -55,7 +55,7 @@ class PlacesService implements ServiceApiInterface
      *
      * @param array $parameters
      * @see https://developers.google.com/places/web-service/autocomplete
-     * @return ResponseInterface
+     * @return PredictionResult
      */
     public function getPlaceAutocomplete(array $parameters)
     {
@@ -63,26 +63,30 @@ class PlacesService implements ServiceApiInterface
         $options = new OptionsResolver();
         $options->setRequired(['output', 'input']);
         $options->setDefined(['offset', 'location', 'radius', 'language', 'types', 'components']);
-        $options->resolve($parameters);
+        $options = $options->resolve($parameters);
 
         // Place the call
         $uri = $this->buildUri(
             sprintf('%s/%s', static::AUTOCOMPLETE_BASE_URL, $options['output']),
+            $this->options['key'],
             $parameters
         );
 
-        return $this->client->request('GET', $uri);
+        $request = $this->client->request('GET', $uri);
+
+        return new PredictionResult($request);
     }
 
     /**
      * @param $uri
+     * @param $key
      * @param $parameters
      * @return string
      */
-    private function buildUri($uri, $parameters)
+    private function buildUri($uri, $key, $parameters)
     {
         $query = http_build_query($parameters);
 
-        return http_build_url($uri, ['query' => $query]);
+        return sprintf('%s?%s&key=%s', $uri, $query, $key);
     }
 }
