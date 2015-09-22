@@ -13,12 +13,11 @@ abstract class AbstractResult
 
     /**
      * Check Google API response
-     * @param $object
      * @return bool
      */
-    public function checkRequestStatus($object)
+    public function checkRequestStatus()
     {
-        if (!in_array($object->getStatus(), [REQUEST_ZERO_RESULTS, REQUEST_OK])) {
+        if (!in_array($this->getStatus(), [static::REQUEST_ZERO_RESULTS, static::REQUEST_OK])) {
             return false;
         }
 

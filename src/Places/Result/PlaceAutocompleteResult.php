@@ -2,7 +2,6 @@
 namespace GoogleMapsApi\Places\Result;
 
 use GoogleMapsApi\Places\Object\PredictionObject;
-use GoogleMapsApi\Result\AbstractResult;
 use GuzzleHttp\Exception\BadResponseException;
 use Psr\Http\Message\ResponseInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -22,7 +21,7 @@ class PlaceAutocompleteResult extends AbstractResult
      * @param ResponseInterface $httpResponse
      * @throws BadResponseException
      * @see https://developers.google.com/places/web-service/autocomplete#place_autocomplete_responses
-     * @throws Exception
+     * @throws \Exception
      */
     public function __construct(ResponseInterface $httpResponse)
     {
@@ -44,7 +43,7 @@ class PlaceAutocompleteResult extends AbstractResult
 
         // Check request status
         if (!$this->checkRequestStatus()) {
-            throw new Exception(
+            throw new \Exception(
                 sprintf('Request failed "%s"', $jsonData)
             );
         }

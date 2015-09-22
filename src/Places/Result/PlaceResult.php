@@ -2,7 +2,6 @@
 namespace GoogleMapsApi\Places\Result;
 
 use GoogleMapsApi\Places\Object\PlaceObject;
-use GoogleMapsApi\Result\AbstractResult;
 use Psr\Http\Message\ResponseInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -21,7 +20,7 @@ class PlaceResult extends AbstractResult
      * @param ResponseInterface $httpResponse
      * @throws BadResponseException
      * @see https://developers.google.com/places/web-service/details#PlaceDetailsResults
-     * @throws Exception
+     * @throws \Exception
      */
     public function __construct(ResponseInterface $httpResponse)
     {
@@ -41,7 +40,7 @@ class PlaceResult extends AbstractResult
 
         // Check request status
         if (!$this->checkRequestStatus()) {
-            throw new Exception(
+            throw new \Exception(
                 sprintf('Request failed "%s"', $jsonData)
             );
         }

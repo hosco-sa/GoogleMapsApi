@@ -30,11 +30,11 @@ class PlaceObject
     }
 
     /**
-     * @return string
+     * @return PlaceAddressObject
      */
     public function getAddressComponents()
     {
-        return $this->data['address_components'];
+        return new PlaceAddressObject($this->data['address_components']);
     }
 
     /**
@@ -51,30 +51,5 @@ class PlaceObject
     public function isCountry()
     {
         return in_array('country', $this->data['types']);
-    }
-
-    /**
-     * @param bool $short
-     * @return bool
-     */
-    public function getCityName($short = true)
-    {
-        if (!$this->isCity()) {
-            return false;
-        }
-
-        $component = current($this->getAddressComponents());
-
-        return $short ? $component['short_name'] : $component['long_name'];
-    }
-
-    /**
-     * @param bool|true $short
-     * @return bool
-     */
-    public function getCountryName($short = true) {
-        $component = array_pop($this->getAddressComponents());
-
-        return $short ? $component['short_name'] : $component['long_name'];
     }
 }
