@@ -39,6 +39,7 @@ class PlaceAddressObject
             'administrative_area_level_1',
             'administrative_area_level_2',
             'administrative_area_level_3',
+            'administrative_area_level_4',
         ]);
 
         // Process Google API Result format
