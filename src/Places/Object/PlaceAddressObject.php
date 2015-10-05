@@ -26,6 +26,7 @@ class PlaceAddressObject
     /**
      * @param array $data
      * @return array
+     * @see https://developers.google.com/maps/documentation/geocoding/intro#Types
      */
     private function resolveAddress(array $data)
     {
@@ -34,12 +35,32 @@ class PlaceAddressObject
         $options->setDefined([
             'locality',
             'sublocality',
+            'sublocality_level_1',
+            'sublocality_level_2',
+            'sublocality_level_3',
+            'sublocality_level_4',
+            'sublocality_level_5',
             'postal_code',
+            'postal_town',
+            'neighborhood',
+            'premise',
+            'subpremise',
+            'natural_feature',
+            'airport',
+            'park',
+            'point_of_interest',
+            'ward',
+            'street_address',
+            'route',
+            'intersection',
+            'political',
             'country',
             'administrative_area_level_1',
             'administrative_area_level_2',
             'administrative_area_level_3',
             'administrative_area_level_4',
+            'administrative_area_level_5',
+            'colloquial_area',
         ]);
 
         // Process Google API Result format
