@@ -11,9 +11,9 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 class PlaceAddressObject
 {
     /**
-     * @var void
+     * @var array
      */
-    private $data;
+    private $data = [];
 
     /**
      * @param array $data
@@ -74,6 +74,14 @@ class PlaceAddressObject
         }
 
         return $options->resolve($rdata);
+    }
+
+    /**
+     * @return array
+     */
+    public function getData()
+    {
+        return $this->data;
     }
 
     /**

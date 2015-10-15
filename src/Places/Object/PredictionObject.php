@@ -21,7 +21,8 @@ class PredictionObject
     public function __construct(array $data)
     {
         $options = new OptionsResolver();
-        $options->setRequired(['description', 'place_id', 'reference', 'id', 'terms', 'types', 'matched_substrings']);
+        $options->setRequired(['description', 'place_id', 'reference', 'id', 'terms', 'types', 'matched_substrings', 'language']);
+
         $this->data = $options->resolve($data);
     }
 

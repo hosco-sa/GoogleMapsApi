@@ -65,6 +65,8 @@ class PlacesService implements ServiceApiInterface
         // Required and optional parameters for this function call
         $options = new OptionsResolver();
         $options->setDefault('output', 'json');
+        $options->setDefault('language', 'en');
+
         $options->setRequired(['input']);
         $options->setDefined(['offset', 'location', 'radius', 'language', 'types', 'components']);
         $options = $options->resolve($parameters);
@@ -78,7 +80,7 @@ class PlacesService implements ServiceApiInterface
 
         $request = $this->client->request('GET', $uri);
 
-        return new PlaceAutocompleteResult($request);
+        return new PlaceAutocompleteResult($request, $options['language']);
     }
 
     /**
@@ -95,6 +97,8 @@ class PlacesService implements ServiceApiInterface
         // Required and optional parameters for this function call
         $options = new OptionsResolver();
         $options->setDefault('output', 'json');
+        $options->setDefault('language', 'en');
+
         $options->setRequired(['placeid']);
         $options->setDefined(['extensions', 'language']);
         $options = $options->resolve($parameters);
@@ -108,7 +112,7 @@ class PlacesService implements ServiceApiInterface
 
         $request = $this->client->request('GET', $uri);
 
-        return new PlaceResult($request);
+        return new PlaceResult($request, $options['language']);
     }
 
     /**

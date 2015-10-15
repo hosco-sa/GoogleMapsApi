@@ -18,15 +18,19 @@ class PlaceResult extends AbstractResult
 
     /**
      * @param ResponseInterface $httpResponse
+     * @param string $language
      * @throws BadResponseException
      * @see https://developers.google.com/places/web-service/details#PlaceDetailsResults
      * @throws \Exception
      */
-    public function __construct(ResponseInterface $httpResponse)
+    public function __construct(ResponseInterface $httpResponse, $language)
     {
         // Get ResponseInterface content and test it for json
         $jsonData = $httpResponse->getBody()->getContents();
         $data     = json_decode($jsonData, true);
+
+        // Append language to result
+        $data['language'] = $language;
 
         if (false === $data) {
             throw new \InvalidArgumentException(
@@ -35,8 +39,12 @@ class PlaceResult extends AbstractResult
         }
 
         $options = new OptionsResolver();
+        $options->setRequired(['language']);
         $options->setDefined(['error_message', 'html_attributions', 'result', 'status']);
         $this->data = $options->resolve($data);
+
+        // Set language as part of result
+        $this->data['result']['language'] = $language;
 
         // Check request status
         if (!$this->checkRequestStatus()) {
