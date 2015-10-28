@@ -41,6 +41,7 @@ class PlaceAddressObject
             'sublocality_level_4' => '',
             'sublocality_level_5' => '',
             'postal_code' => '',
+            'postal_code_prefix' => '',
             'postal_town' => '',
             'neighborhood' => '',
             'premise' => '',
