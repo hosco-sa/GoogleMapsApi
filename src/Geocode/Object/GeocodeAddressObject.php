@@ -62,7 +62,8 @@ class GeocodeAddressObject
             'administrative_area_level_4' => '',
             'administrative_area_level_5' => '',
             'colloquial_area' => '',
-            'street_number' => ''
+            'street_number' => '',
+            'postal_code_suffix' => ''
         ]);
 
         // Process Google API Result format
