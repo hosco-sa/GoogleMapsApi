@@ -17,6 +17,12 @@ class PlaceObject
     /**
      * @param array $data
      * @see https://developers.google.com/places/web-service/autocomplete#place_autocomplete_results
+     * @throws \Symfony\Component\OptionsResolver\Exception\AccessException
+     * @throws \Symfony\Component\OptionsResolver\Exception\InvalidOptionsException
+     * @throws \Symfony\Component\OptionsResolver\Exception\MissingOptionsException
+     * @throws \Symfony\Component\OptionsResolver\Exception\NoSuchOptionException
+     * @throws \Symfony\Component\OptionsResolver\Exception\OptionDefinitionException
+     * @throws \Symfony\Component\OptionsResolver\Exception\UndefinedOptionsException
      */
     public function __construct(array $data)
     {
@@ -25,7 +31,7 @@ class PlaceObject
         $options->setDefined([
             'address_components', 'formatted_address', 'formatted_phone_number', 'geometry', 'icon', 'id',
             'international_phone_number', 'name', 'opening_hours', 'adr_address', 'place_id', 'geometry',
-            'reference', 'scope', 'types', 'url', 'vicinity', 'html_attributions'
+            'reference', 'scope', 'types', 'url', 'vicinity', 'html_attributions', 'photos', 'utc_offset'
         ]);
         $this->data = $options->resolve($data);
     }
