@@ -165,4 +165,24 @@ class PlaceAddressObject
     {
         return $this->getAdminLevel1($short) ?: $this->getAdminLevel2($short) ?: $this->getAdminLevel3($short);
     }
+
+    /**
+     * @return string
+     */
+    public function getLongFormattedAddress()
+    {
+        $city = $this->getLocality();
+
+        if ($city) {
+            return sprintf('%s, %s', $city, $this->getCountry(false));
+        }
+
+        $adminLevel = $this->getLowestAdminLevel();
+
+        if ($adminLevel) {
+            return sprintf('%s, %s', $adminLevel, $this->getCountry(false));
+        }
+
+        return $this->getCountry(false);
+    }
 }
