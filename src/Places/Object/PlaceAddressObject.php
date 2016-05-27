@@ -91,7 +91,11 @@ class PlaceAddressObject
      */
     public function getLocality($short = true)
     {
-        return $this->data['locality'] ? $this->data['locality'][$short ? 'short_name' : 'long_name'] : '';
+        if ($this->data['locality']) {
+            return $this->data['locality'][$short ? 'short_name' : 'long_name'];
+        }
+
+        return $this->data['colloquial_area'] ? $this->data['colloquial_area'][$short ? 'short_name' : 'long_name'] : '';
     }
 
     /**
