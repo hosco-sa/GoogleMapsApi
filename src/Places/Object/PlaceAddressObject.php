@@ -1,7 +1,6 @@
 <?php
 namespace GoogleMapsApi\Places\Object;
 
-use Symfony\Component\OptionsResolver\Exception\MissingOptionsException;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
@@ -77,7 +76,7 @@ class PlaceAddressObject
 
         try {
             $data = $options->resolve($rdata);
-        } catch (MissingOptionsException $e) {
+        } catch (\Exception $e) {
 
         }
         
