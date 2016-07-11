@@ -73,7 +73,7 @@ class PlaceObject
      */
     public function isCity()
     {
-        return in_array('locality', $this->data['types']);
+        return in_array('locality', $this->data['types'] ?? [], true);
     }
 
     /**
@@ -81,6 +81,6 @@ class PlaceObject
      */
     public function isCountry()
     {
-        return in_array('country', $this->data['types']);
+        return in_array('country', $this->data['types'] ?? [], true);
     }
 }
