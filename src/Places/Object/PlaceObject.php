@@ -31,7 +31,8 @@ class PlaceObject
         $options->setDefined([
             'address_components', 'formatted_address', 'formatted_phone_number', 'geometry', 'icon', 'id',
             'international_phone_number', 'name', 'opening_hours', 'adr_address', 'place_id', 'geometry',
-            'reference', 'scope', 'types', 'url', 'vicinity', 'html_attributions', 'photos', 'utc_offset'
+            'reference', 'scope', 'types', 'url', 'vicinity', 'html_attributions', 'photos', 'utc_offset',
+            'rating', 'reviews', 'website'
         ]);
         $this->data = $options->resolve($data);
     }
