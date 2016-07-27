@@ -74,13 +74,7 @@ class PlaceAddressObject
             $rdata[$type] = $component;
         }
 
-        try {
-            $data = $options->resolve($rdata);
-        } catch (\Exception $e) {
-
-        }
-        
-        return $data;
+        return $rdata;
     }
 
     /**
