@@ -91,11 +91,11 @@ class PlaceAddressObject
      */
     public function getLocality($short = true)
     {
-        if ($this->data['locality']) {
-            return $this->data['locality'][$short ? 'short_name' : 'long_name'];
+        if (@$this->data['locality']) {
+            return @$this->data['locality'][$short ? 'short_name' : 'long_name'];
         }
 
-        return $this->data['colloquial_area'] ? $this->data['colloquial_area'][$short ? 'short_name' : 'long_name'] : '';
+        return @$this->data['colloquial_area'] ? @$this->data['colloquial_area'][$short ? 'short_name' : 'long_name'] : '';
     }
 
     /**
@@ -104,7 +104,7 @@ class PlaceAddressObject
      */
     public function getSubLocality($short = true)
     {
-        return $this->data['sublocality'] ? $this->data['sublocality'][$short ? 'short_name' : 'long_name'] : '';
+        return @$this->data['sublocality'] ? @$this->data['sublocality'][$short ? 'short_name' : 'long_name'] : '';
     }
 
     /**
@@ -113,7 +113,7 @@ class PlaceAddressObject
      */
     public function getPostalCode($short = true)
     {
-        return $this->data['postal_code'] ? $this->data['postal_code'][$short ? 'short_name' : 'long_name'] : '';
+        return @$this->data['postal_code'] ? @$this->data['postal_code'][$short ? 'short_name' : 'long_name'] : '';
     }
 
     /**
@@ -122,7 +122,7 @@ class PlaceAddressObject
      */
     public function getCountry($short = true)
     {
-        return $this->data['country'] ? $this->data['country'][$short ? 'short_name' : 'long_name'] : '';
+        return @$this->data['country'] ? @$this->data['country'][$short ? 'short_name' : 'long_name'] : '';
     }
 
     /**
@@ -131,7 +131,7 @@ class PlaceAddressObject
      */
     public function getAdminLevel1($short = true)
     {
-        return $this->data['administrative_area_level_1'] ? $this->data['administrative_area_level_1'][$short ? 'short_name' : 'long_name'] : '';
+        return @$this->data['administrative_area_level_1'] ? @$this->data['administrative_area_level_1'][$short ? 'short_name' : 'long_name'] : '';
     }
 
     /**
@@ -140,7 +140,7 @@ class PlaceAddressObject
      */
     public function getAdminLevel2($short = true)
     {
-        return $this->data['administrative_area_level_2'] ? $this->data['administrative_area_level_2'][$short ? 'short_name' : 'long_name'] : '';
+        return @$this->data['administrative_area_level_2'] ? @$this->data['administrative_area_level_2'][$short ? 'short_name' : 'long_name'] : '';
     }
 
     /**
@@ -149,7 +149,7 @@ class PlaceAddressObject
      */
     public function getAdminLevel3($short = true)
     {
-        return $this->data['administrative_area_level_3'] ? $this->data['administrative_area_level_3'][$short ? 'short_name' : 'long_name'] : '';
+        return @$this->data['administrative_area_level_3'] ? @$this->data['administrative_area_level_3'][$short ? 'short_name' : 'long_name'] : '';
     }
 
     /**
