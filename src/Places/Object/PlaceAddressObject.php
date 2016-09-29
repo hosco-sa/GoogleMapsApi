@@ -94,6 +94,9 @@ class PlaceAddressObject
         if (@$this->data['locality']) {
             return @$this->data['locality'][$short ? 'short_name' : 'long_name'];
         }
+        if (@$this->data['postal_town']) {
+            return @$this->data['postal_town'][$short ? 'short_name' : 'long_name'];
+        }
 
         return @$this->data['colloquial_area'] ? @$this->data['colloquial_area'][$short ? 'short_name' : 'long_name'] : '';
     }
