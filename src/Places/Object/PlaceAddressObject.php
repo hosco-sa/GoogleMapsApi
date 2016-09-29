@@ -91,6 +91,14 @@ class PlaceAddressObject
      */
     public function getLocality($short = true)
     {
+        if ($this->getSubLocality($short)) {
+            return $this->getSubLocality($short);
+        }
+
+        if ($this->getSubLocalityLevel1($short)) {
+            return $this->getSubLocalityLevel1($short);
+        }
+
         if (@$this->data['locality']) {
             return @$this->data['locality'][$short ? 'short_name' : 'long_name'];
         }
@@ -109,6 +117,15 @@ class PlaceAddressObject
     public function getSubLocality($short = true)
     {
         return @$this->data['sublocality'] ? @$this->data['sublocality'][$short ? 'short_name' : 'long_name'] : '';
+    }
+
+    /**
+     * @param bool|true $short
+     * @return string
+     */
+    public function getSubLocalityLevel1($short = true)
+    {
+        return @$this->data['sublocality_level_1'] ? @$this->data['sublocality_level_1'][$short ? 'short_name' : 'long_name'] : '';
     }
 
     /**
