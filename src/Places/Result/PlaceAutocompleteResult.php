@@ -27,7 +27,7 @@ class PlaceAutocompleteResult extends AbstractResult
     public function __construct(ResponseInterface $httpResponse, $language)
     {
         // Get ResponseInterface content and test it for json
-        $jsonData = $httpResponse->getBody()->getContents();
+        $jsonData = (string) $httpResponse->getBody();
         $data     = json_decode($jsonData, true);
 
         // Append language parameter to data
